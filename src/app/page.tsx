@@ -6,11 +6,14 @@ import { useAuthActions } from "@convex-dev/auth/react"
 
 
 export default function Home() {
+  
   const { signOut } = useAuthActions();
   return (
     <div>
-      <div>logged in</div>
-      <Button onClick={() => signOut()}>Sign out</Button>
+      logged in
+      <Button onClick={() => signOut()}>
+        Sign out
+      </Button>
     </div>
   )
 }
