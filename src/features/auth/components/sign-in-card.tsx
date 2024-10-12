@@ -1,5 +1,5 @@
 import { FcGoogle } from "react-icons/fc"
-import { FaGithub,} from "react-icons/fa"
+import { FaGithub, } from "react-icons/fa"
 import { useState } from "react"
 import { TriangleAlert } from "lucide-react";
 import { useAuthActions } from "@convex-dev/auth/react";
@@ -34,13 +34,15 @@ export const SignInCard = ({
         setError("Invaild email or password")
       })
       .finally(() => {
-        setPending(pending);
+        setPending(false);
       });
   };
 
   const onProviderSignIn = (value: "github" | "google") => {
     setPending(true);
-    signIn(value).finally(() => { setPending(pending) })
+    signIn(value).finally(() => {
+      setPending(false)
+    })
   };
 
 

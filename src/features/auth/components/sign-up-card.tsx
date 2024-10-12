@@ -20,6 +20,7 @@ export const SignUpCard = ({
 }: SignUpCardProps) => {
   const { signIn } = useAuthActions();
 
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("")
@@ -35,7 +36,7 @@ export const SignUpCard = ({
     }
 
     setPending(true)
-    signIn("password", { password, email, flow: "signUp" })
+    signIn("password", { name, password, email, flow: "signUp" })
       .catch(() => {
         setError("Something went wrong");
       })
@@ -46,7 +47,7 @@ export const SignUpCard = ({
 
   const onProviderSignUp = (value: "github" | "google") => {
     setPending(true);
-    signIn(value).finally(() => { setPending(pending) })
+    signIn(value).finally(() => { setPending(false) })
   };
 
   return (
@@ -67,6 +68,13 @@ export const SignUpCard = ({
       )}
       <CardContent className="space-y-5 px-0 pb-0">
         <form onSubmit={onPasswordSignUp} className="space-y-2.5">
+          <Input
+            disabled={pending}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Full name"
+            required
+          />
           <Input
             disabled={pending}
             value={email}
